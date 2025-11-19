@@ -4,100 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Products - Millennia Computers</title>
+    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
-        /* --- CSS Variables --- */
-        :root {
-            --primary-blue: #007bff;
-            --primary-light: #ebf5ff;
-            --text-dark: #333333;
-            --text-light: #666666;
-            --border-light: #e1e1e1;
-            --shadow-soft: 0 4px 20px rgba(0,0,0,0.05);
-            --shadow-premium: 0 10px 30px rgba(0,0,0,0.15);
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa;
-            color: var(--text-dark);
-            padding-top: 80px; /* Space for fixed header */
-        }
-
-        a { text-decoration: none; color: inherit; cursor: pointer; }
-        ul { list-style: none; }
-
-        /* --- Header & Navigation --- */
-        .header-premium {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255,255,255,0.98);
-            border-bottom: 1px solid var(--border-light);
-            z-index: 1000;
-            padding: 1rem 2rem;
-        }
-
-        .header-container-premium {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo-premium {
-            font-weight: 800;
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #111;
-        }
-
-        .nav-premium {
-            display: flex;
-            gap: 2rem;
-        }
-
+        /* Simple Dropdown Styles */
         .nav-premium > li {
             position: relative;
         }
 
-        .nav-premium a {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: #444;
-            transition: color 0.2s;
-        }
-
-        .nav-premium a:hover, .nav-premium a.active {
-            color: var(--primary-blue);
-        }
-
-        /* --- FIXED DROPDOWN MENU --- */
         .dropdown-content {
             display: none;
             position: absolute;
             top: 100%;
             left: 0;
             background: white;
-            min-width: 220px;
+            min-width: 200px;
             box-shadow: var(--shadow-premium);
             border-radius: 12px;
-            padding: 0.5rem;
+            padding: 1rem;
             z-index: 1001;
             border: 1px solid var(--border-light);
-            margin-top: 10px;
-            
-            /* Scrollbar Logic */
-            max-height: 60vh; 
-            overflow-y: auto;
         }
 
         .dropdown:hover .dropdown-content {
@@ -106,11 +33,14 @@
 
         .dropdown-content a {
             display: block;
-            padding: 10px 15px;
-            color: #333;
+            padding: 0.8rem 1rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.2s ease;
             font-weight: 500;
             font-size: 0.9rem;
             border-radius: 6px;
+            cursor: pointer;
         }
 
         .dropdown-content a:hover {
@@ -118,62 +48,20 @@
             color: var(--primary-blue);
         }
 
-        /* --- Product Section --- */
-        .container-premium {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .section-header-premium {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title-premium {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            color: #111;
-        }
-
-        /* Filter Banner */
-        .active-category {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: var(--shadow-soft);
-            border: 1px solid var(--border-light);
-            display: none; /* Hidden by default */
-        }
-        
-        .clear-category {
-            background: var(--primary-blue);
-            color: white;
-            border: none;
-            padding: 5px 15px;
-            border-radius: 4px;
-            margin-left: 10px;
-            cursor: pointer;
-        }
-
-        /* Grid */
+        /* Smaller Product Cards */
         .products-grid-premium {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
-        /* Cards */
         .product-card-premium {
             background: white;
             border-radius: 16px;
             padding: 1.5rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
             border: 1px solid var(--border-light);
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .product-card-premium:hover {
@@ -181,303 +69,373 @@
             box-shadow: var(--shadow-premium);
         }
 
-        .product-image-container {
+        .product-image-container-premium {
+            position: relative;
             height: 200px;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f5f5f7 0%, #e8e8e8 100%);
+            border-radius: 12px;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f4f4f4;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            padding: 1rem;
+            overflow: hidden;
         }
 
-        .product-image-container img {
+        .product-image-premium {
+            max-height: 160px;
             max-width: 100%;
-            max-height: 100%;
             object-fit: contain;
+            transition: transform 0.3s ease;
         }
 
-        .product-category {
-            font-size: 0.8rem;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
+        .product-card-premium:hover .product-image-premium {
+            transform: scale(1.05);
         }
 
-        .product-title {
+        .product-title-premium {
             font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            line-height: 1.4;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
         }
 
-        .product-price {
-            font-size: 1.25rem;
+        .product-price-premium {
+            font-size: 1.3rem;
+            font-weight: 700;
             color: var(--primary-blue);
-            font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 0.5rem;
         }
 
-        .product-reviews {
-            font-size: 0.85rem;
-            color: #ffc107;
-            margin-bottom: 15px;
-        }
-        
-        .review-count { color: #999; margin-left: 5px; }
-
-        .btn-row {
-            margin-top: auto;
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-view {
-            flex: 1;
+        /* Better Button Colors */
+        .btn-view-details-premium {
             background: var(--primary-blue);
             color: white;
             border: none;
-            padding: 10px;
+            padding: 0.7rem 1.2rem;
             border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
             font-weight: 600;
-            cursor: pointer;
-        }
-
-        .btn-cart {
-            width: 45px;
-            background: #eee;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 0.4rem;
+            flex: 1;
         }
-        
-        .btn-cart:hover { background: #e0e0e0; }
 
-        /* Header Actions */
-        .header-actions-premium { display: flex; gap: 1rem; align-items: center; }
-        .search-premium input { padding: 8px 15px; border-radius: 20px; border: 1px solid #ddd; }
-        .cart-premium { background: none; border: none; cursor: pointer; position: relative; font-size: 1.2rem; }
-        .cart-count { position: absolute; top: -8px; right: -8px; background: red; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 10px; }
+        .btn-view-details-premium:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
 
+        /* Search Results */
+        .search-results-info {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-light);
+        }
+
+        /* Active Category Indicator */
+        .active-category {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .clear-category {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-left: 1rem;
+            font-size: 0.8rem;
+        }
+
+        .clear-category:hover {
+            background: rgba(255,255,255,0.3);
+        }
     </style>
 </head>
 <body>
-
+    <!-- Premium Glassmorphism Header -->
     <header class="header-premium">
         <div class="header-container-premium">
-            <a href="#" class="logo-premium">
-                <span style="margin-right: 8px;">💻</span> Millennia
+            <a href="home.html" class="logo-premium">
+                <span class="logo-icon-premium">💻</span>
+                Millennia Computers
             </a>
             
             <nav>
                 <ul class="nav-premium">
-                    <li><a href="home.html">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
                     <li class="dropdown">
-                        <a href="#" class="active">Products <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
-                        <div class="dropdown-content">
-                            <a onclick="showAllProducts()">All Products</a>
-                            <a onclick="filterByCategory('laptops')">Laptops</a>
-                            <a onclick="filterByCategory('smartphones')">Smartphones</a>
-                            <a onclick="filterByCategory('pcComponents')">PC Components</a>
-                            <a onclick="filterByCategory('gpus')">Graphics Cards</a>
-                            <a onclick="filterByCategory('ram')">RAM</a>
-                            <a onclick="filterByCategory('storageDevices')">Storage Devices</a>
-                            <a onclick="filterByCategory('motherboards')">Motherboards</a>
-                            <a onclick="filterByCategory('peripherals')">Peripherals</a>
-                            <a onclick="filterByCategory('psuCasesCooling')">PSU & Cooling</a>
-                        </div>
-                    </li>
-                    <li><a href="#">Popular</a></li>
-                    <li><a href="#">Support</a></li>
+    <a href="products.html" class="active">Products <i class="fas fa-chevron-down" style="font-size: 0.7rem; margin-left: 0.3rem;"></i></a>
+    <div class="dropdown-content">
+        <a onclick="showAllProducts()">All Products</a>
+        <a onclick="filterByCategory('laptops')">Laptops</a>
+        <a onclick="filterByCategory('smartphones')">Smartphones</a>
+        <a onclick="filterByCategory('pcComponents')">PC Components</a>
+        <a onclick="filterByCategory('gpus')">Graphics Cards</a>
+        <a onclick="filterByCategory('ram')">RAM</a>
+        <a onclick="filterByCategory('storageDevices')">Storage Devices</a>
+        <a onclick="filterByCategory('motherboards')">Motherboards</a>
+        <a onclick="filterByCategory('peripherals')">Peripherals</a>
+        <a onclick="filterByCategory('psuCasesCooling')">PSU & Cooling</a>
+    </div>
+</li>
+                    <li><a href="popular.html">Popular</a></li>
+                    <li><a href="support.html">Support</a></li>
                 </ul>
             </nav>
-
+            
             <div class="header-actions-premium">
                 <div class="search-premium">
-                    <input type="text" placeholder="Search..." id="search-input">
+                    <i class="fas fa-search search-icon-premium"></i>
+                    <input type="text" placeholder="Search products..." id="search-input">
                 </div>
                 <button class="cart-premium">
                     <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">0</span>
+                    <span class="cart-count-premium">0</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <section class="container-premium">
-        <div class="section-header-premium">
-            <h2 class="section-title-premium">All Products</h2>
-            <p style="color: #666;">Browse our premium collection</p>
-        </div>
-
-        <div id="active-filter-banner" class="active-category">
-            Current Filter: <span id="filter-name" style="font-weight: 700; color: var(--primary-blue);">All</span>
-            <button class="clear-category" onclick="showAllProducts()">Show All</button>
-        </div>
-
-        <div id="products-grid" class="products-grid-premium">
+    <!-- Products Section -->
+    <section class="featured-products-premium" style="padding: 120px 0 50px;">
+        <div class="container-premium">
+            <div class="section-header-premium">
+                <h2 class="section-title-premium">All Products</h2>
+                <p class="section-subtitle-premium">Discover our complete collection of premium technology products</p>
             </div>
+
+            <!-- Reset Filters Button -->
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <button onclick="resetAllFilters()" style="background: var(--primary-blue); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                    <i class="fas fa-refresh"></i> Reset All Filters
+                </button>
+            </div>
+
+            <!-- Active Category Indicator -->
+            <div class="active-category" id="active-category" style="display: none;">
+                Showing: <span id="current-category-name">Laptops</span>
+                <button class="clear-category" onclick="showAllProducts()">Show All</button>
+            </div>
+
+            <!-- Search Results Info -->
+            <div class="search-results-info" id="search-results-info" style="display: none;">
+                <i class="fas fa-search" style="font-size: 2rem; color: var(--primary-blue); margin-bottom: 1rem;"></i>
+                <h3 style="color: var(--text-dark); margin-bottom: 0.5rem;">Search Results</h3>
+                Showing <span style="color: var(--primary-blue); font-weight: 700;" id="results-count">0</span> results for "<span style="color: var(--primary-blue); font-weight: 600;" id="search-term"></span>"
+            </div>
+            
+            <!-- Products Grid Only - No Sidebar -->
+            <div class="products-grid-premium" id="products-container">
+                <!-- Products will be loaded by JavaScript -->
+            </div>
+        </div>
     </section>
 
-    <script>
-        // --- 1. DATA SETS (Simplified for stability) ---
-        // I have pre-assigned the correct 'category' string to ensure filtering works.
-
-        const laptops = [
-            { id: 1, name: "ASUS ROG Strix G16", price: "Rs. 429,999", rating: "★★★★★", reviews: "94", image: "images/Laptops/asus-rog-strix-g16.png" },
-            { id: 2, name: "Lenovo Legion 5 Pro", price: "Rs. 359,999", rating: "★★★★★", reviews: "217", image: "images/Laptops/lenovo-legion-5-pro.png" },
-            { id: 3, name: "Acer Nitro 5", price: "Rs. 249,999", rating: "★★★★☆", reviews: "185", image: "images/Laptops/acer-nitro-5.png" },
-            { id: 5, name: "MacBook Pro 14", price: "Rs. 850,000", rating: "★★★★★", reviews: "120", image: "images/Laptops/apple-macbook-pro-14-m3.png" }
-        ];
-
-        const smartphones = [
-            { id: 34, name: "Samsung S24 Ultra", price: "Rs. 349,999", rating: "★★★★★", reviews: "88", image: "images/Smartphones/samsung-galaxy-s24-ultra.png" },
-            { id: 35, name: "iPhone 15 Pro Max", price: "Rs. 389,999", rating: "★★★★★", reviews: "124", image: "images/Smartphones/apple-iphone-15-pro-max.png" }
-        ];
-
-        const gpus = [
-            { id: 76, name: "NVIDIA RTX 4090", price: "Rs. 650,000", rating: "★★★★★", reviews: "50", image: "images/PC Components - GPUs/nvidia-rtx-4090.png" },
-            { id: 77, name: "NVIDIA RTX 4080 Super", price: "Rs. 420,000", rating: "★★★★★", reviews: "45", image: "images/PC Components - GPUs/nvidia-rtx-4080-super.png" },
-            { id: 84, name: "NVIDIA RTX 3060", price: "Rs. 110,000", rating: "★★★★☆", reviews: "300", image: "images/PC Components - GPUs/nvidia-rtx-3060.png" }
-        ];
-
-        const pcComponents = [
-            { id: 66, name: "AMD Ryzen 9 7950X", price: "Rs. 210,000", rating: "★★★★★", reviews: "80", image: "images/PC Components/amd-ryzen-9-7950x.png" },
-            { id: 69, name: "Intel Core i9-14900K", price: "Rs. 230,000", rating: "★★★★★", reviews: "95", image: "images/PC Components/intel-core-i9-14900k.png" }
-        ];
-
-        const ram = [
-            { id: 86, name: "Corsair Vengeance 32GB", price: "Rs. 48,000", rating: "★★★★★", reviews: "200", image: "images/RAM/corsair-vengeance-rgb-32gb-ddr5.png" }
-        ];
-
-        const storageDevices = [
-            { id: 100, name: "Samsung T7 Shield 1TB", price: "Rs. 24,999", rating: "★★★★★", reviews: "150", image: "images/Storage Devices/samsung-t7-shield-1tb.png" }
-        ];
-
-        const motherboards = [
-            { id: 115, name: "ASUS ROG Strix X670E", price: "Rs. 145,000", rating: "★★★★★", reviews: "40", image: "images/Motherboards/asus-rog-strix-x670e-f.png" }
-        ];
-
-        const peripherals = [
-            { id: 120, name: "Logitech G Pro X", price: "Rs. 45,000", rating: "★★★★★", reviews: "500", image: "images/Peripherals/logitech-g-pro-x-superlight.png" }
-        ];
-        
-        const psuCasesCooling = [
-             { id: 94, name: "Noctua NH-D15", price: "Rs. 41,000", rating: "★★★★★", reviews: "Cooling", image: "images/PSU, Cases & Cooling/noctua-nh-d15-cooler.png" }
-        ];
-
-        // --- 2. INITIALIZATION ---
-        let allProducts = [];
-
-        function init() {
-            // This combines all arrays and FORCES the correct category name onto them.
-            // This fixes the issue where your original data said "parts" instead of "gpus".
-            allProducts = [
-                ...assignCat(laptops, 'laptops'),
-                ...assignCat(smartphones, 'smartphones'),
-                ...assignCat(pcComponents, 'pcComponents'),
-                ...assignCat(gpus, 'gpus'),
-                ...assignCat(ram, 'ram'),
-                ...assignCat(storageDevices, 'storageDevices'),
-                ...assignCat(motherboards, 'motherboards'),
-                ...assignCat(peripherals, 'peripherals'),
-                ...assignCat(psuCasesCooling, 'psuCasesCooling')
-            ];
+    <!-- Premium Footer -->
+    <footer class="footer-premium">
+        <div class="footer-content-premium">
+            <div class="footer-section-premium">
+                <h3>About Millennia</h3>
+                <p>Your trusted partner in premium computing solutions.</p>
+            </div>
             
-            // Initial Load
-            displayProducts(allProducts);
-        }
+            <div class="footer-section-premium">
+                <h3>Quick Links</h3>
+                <ul class="footer-links-premium">
+                    <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="index.html"><i class="fas fa-th-large"></i> All Products</a></li>
+                    <li><a href="popular.html"><i class="fas fa-fire"></i> Popular</a></li>
+                    <li><a href="support.html"><i class="fas fa-headset"></i> Support</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section-premium">
+                <h3>Newsletter</h3>
+                <p>Subscribe for exclusive updates on new products and special offers.</p>
+                <div class="newsletter-premium">
+                    <input type="email" placeholder="Enter your email">
+                    <button>Subscribe</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright-premium">
+            Copyright © 2024 Millennia Computers. All rights reserved.
+        </div>
+    </footer>
 
-        // Helper to assign category string
-        function assignCat(arr, catName) {
-            return arr.map(item => ({ ...item, category: catName }));
-        }
+<script src="all-products.js"></script>
+<script>
+    let allProducts = [];
+    let currentSearchTerm = '';
+    let activeCategory = 'all';
 
-        // --- 3. DISPLAY LOGIC ---
-        function displayProducts(products) {
-            const grid = document.getElementById('products-grid');
-            grid.innerHTML = ''; 
-
-            if (products.length === 0) {
-                grid.innerHTML = '<h3 style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #888;">No products found in this category.</h3>';
-                return;
-            }
-
-            products.forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'product-card-premium';
-                
-                const imgUrl = product.image || 'https://via.placeholder.com/400x300?text=No+Image';
-
-                card.innerHTML = `
-                    <div class="product-image-container">
-                        <img src="${imgUrl}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Found'">
-                    </div>
-                    <div class="product-category">${getPrettyName(product.category)}</div>
-                    <h3 class="product-title">${product.name}</h3>
-                    <div class="product-price">${product.price}</div>
-                    <div class="product-reviews">${product.rating} <span class="review-count">(${product.reviews})</span></div>
-                    <div class="btn-row">
-                        <button class="btn-view" onclick="viewDetails(${product.id})">View Details</button>
-                        <button class="btn-cart" onclick="addToCart()"><i class="fas fa-plus"></i></button>
-                    </div>
-                `;
-                grid.appendChild(card);
+    document.addEventListener('DOMContentLoaded', function() {
+        loadAllProducts();
+        
+        // Search Bar Listener
+        const searchInput = document.getElementById('search-input');
+        if(searchInput){
+            searchInput.addEventListener('input', function(e) {
+                currentSearchTerm = e.target.value.trim().toLowerCase();
+                applyFilters();
             });
         }
 
-        // --- 4. FILTER LOGIC ---
-        function filterByCategory(category) {
-            console.log("Filtering: " + category);
-            
-            // Update Banner
-            const banner = document.getElementById('active-filter-banner');
+        // Scroll Effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header-premium');
+            if (window.scrollY > 100) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+    });
+
+    function loadAllProducts() {
+        // Helper to FORCE the correct category name onto the data
+        // This fixes the issue where your data says "parts" but the filter wants "gpus"
+        const setCat = (arr, name) => arr.map(item => ({...item, category: name}));
+
+        // Combine all arrays from your external file
+        allProducts = [
+            ...setCat(laptops, 'laptops'), 
+            ...setCat(smartphones, 'smartphones'),
+            ...setCat(pcComponents, 'pcComponents'),
+            ...setCat(gpus, 'gpus'),
+            ...setCat(ram, 'ram'),
+            ...setCat(psuCasesCooling, 'psuCasesCooling'),
+            ...setCat(storageDevices, 'storageDevices'),
+            ...setCat(motherboards, 'motherboards'),
+            ...setCat(peripherals, 'peripherals')
+        ];
+
+        // Show everything by default
+        displayProducts(allProducts);
+    }
+
+    function filterByCategory(category) {
+        console.log('Filtering by:', category);
+        activeCategory = category;
+        currentSearchTerm = ''; // Clear search when picking a category
+        
+        // Update UI (Optional Banner)
+        const banner = document.getElementById('active-filter-banner');
+        const filterName = document.getElementById('filter-name');
+        if(banner && filterName) {
             banner.style.display = 'block';
-            document.getElementById('filter-name').innerText = getPrettyName(category);
-
-            // Filter
-            const filtered = allProducts.filter(p => p.category === category);
-            displayProducts(filtered);
-        }
-
-        function showAllProducts() {
-            document.getElementById('active-filter-banner').style.display = 'none';
-            displayProducts(allProducts);
+            filterName.innerText = getCategoryDisplayName(category);
         }
         
-        // --- 5. SEARCH LOGIC ---
-        document.getElementById('search-input').addEventListener('input', function(e) {
-            const term = e.target.value.toLowerCase();
-            const filtered = allProducts.filter(p => p.name.toLowerCase().includes(term));
-            displayProducts(filtered);
+        applyFilters();
+    }
+
+    function showAllProducts() {
+        activeCategory = 'all';
+        currentSearchTerm = '';
+        
+        const banner = document.getElementById('active-filter-banner');
+        if(banner) banner.style.display = 'none';
+        
+        applyFilters();
+    }
+    
+    function resetAllFilters() {
+        showAllProducts();
+    }
+
+    function applyFilters() {
+        let filtered = allProducts;
+
+        // 1. Filter by Category
+        if (activeCategory !== 'all') {
+            filtered = filtered.filter(p => p.category === activeCategory);
+        }
+
+        // 2. Filter by Search
+        if (currentSearchTerm) {
+            filtered = filtered.filter(p => 
+                p.name.toLowerCase().includes(currentSearchTerm) || 
+                p.category.toLowerCase().includes(currentSearchTerm)
+            );
+        }
+        
+        displayProducts(filtered);
+    }
+
+    function displayProducts(products) {
+        const container = document.getElementById('products-container');
+        container.innerHTML = '';
+
+        if (products.length === 0) {
+            container.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 4rem;">
+                    <h3 style="color: #666;">No products found.</h3>
+                    <button onclick="showAllProducts()" style="background: var(--primary-blue); color: white; border: none; padding: 10px 20px; border-radius: 8px; margin-top: 1rem; cursor: pointer;">Show All</button>
+                </div>`;
+            return;
+        }
+
+        products.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'product-card-premium'; 
+            
+            // Fallback image logic
+            const img = product.image || 'https://via.placeholder.com/300';
+
+            card.innerHTML = `
+                <div class="product-image-container-premium">
+                    <img src="${img}" alt="${product.name}" class="product-image-premium" onerror="this.src='https://via.placeholder.com/300'">
+                </div>
+                <div class="product-info-premium">
+                    <div class="product-category-premium" style="font-size: 0.8rem; color: #888; text-transform: uppercase; margin-bottom: 5px;">
+                        ${getCategoryDisplayName(product.category)}
+                    </div>
+                    <h3 class="product-title-premium">${product.name}</h3>
+                    <div class="product-price-premium">${product.price}</div>
+                    <div class="product-rating-premium">
+                        <span class="stars-premium">${product.rating}</span>
+                        <span class="reviews">${product.reviews}</span>
+                    </div>
+                    <div class="product-actions-premium">
+                        <button class="btn-view-details-premium" onclick="window.location.href='product-details.html?id=${product.id}'">
+                            <i class="fas fa-eye"></i> View
+                        </button>
+                        <button class="btn-add-cart-premium">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
         });
+    }
 
-        // Helpers
-        function getPrettyName(cat) {
-            const map = {
-                'laptops': 'Laptops', 'smartphones': 'Smartphones', 'pcComponents': 'PC Components',
-                'gpus': 'Graphics Cards', 'ram': 'RAM', 'storageDevices': 'Storage',
-                'motherboards': 'Motherboards', 'peripherals': 'Peripherals', 'psuCasesCooling': 'PSU & Cooling'
-            };
-            return map[cat] || cat;
-        }
-
-        function viewDetails(id) {
-            window.location.href = `product-details.html?id=${id}`;
-        }
-
-        function addToCart() {
-            alert("Added to cart!");
-        }
-
-        // Run
-        init();
-
-    </script>
+    function getCategoryDisplayName(cat) {
+        const names = {
+            'laptops': 'Laptops', 'smartphones': 'Smartphones', 'pcComponents': 'PC Components',
+            'gpus': 'Graphics Cards', 'ram': 'RAM', 'storageDevices': 'Storage',
+            'motherboards': 'Motherboards', 'peripherals': 'Peripherals', 'psuCasesCooling': 'PSU & Cooling'
+        };
+        return names[cat] || cat;
+    }
+</script>
 </body>
 </html>
