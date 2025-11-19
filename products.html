@@ -293,18 +293,35 @@
             });
         });
 
-        function loadAllProducts() {
-            // Get ALL products from all categories
+      function loadAllProducts() {
+            // Helper function to fix category names ensuring they match the filter keys
+            const setCategory = (products, categoryName) => {
+                return products.map(product => ({
+                    ...product,
+                    category: categoryName
+                }));
+            };
+
+            // Load and correct the categories dynamically
             allProducts = [
-                ...laptops, 
-                ...smartphones,
-                ...pcComponents,
-                ...gpus,
-                ...ram,
-                ...psuCasesCooling,
-                ...storageDevices,
-                ...motherboards,
-                ...peripherals
+                ...setCategory(laptops, 'laptops'), 
+                ...setCategory(smartphones, 'smartphones'),
+                ...setCategory(pcComponents, 'pcComponents'),
+                ...setCategory(gpus, 'gpus'),
+                ...setCategory(ram, 'ram'),
+                ...setCategory(psuCasesCooling, 'psuCasesCooling'),
+                ...setCategory(storageDevices, 'storageDevices'),
+                ...setCategory(motherboards, 'motherboards'),
+                ...setCategory(peripherals, 'peripherals')
+            ];
+
+            console.log('Total products loaded:', allProducts.length);
+            
+            // Force show all products initially
+            activeCategory = 'all';
+            displayProducts(allProducts);
+            initScrollAnimations();
+        }
             ];
 
             console.log('Total products loaded:', allProducts.length);
